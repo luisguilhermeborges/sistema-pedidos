@@ -1,14 +1,13 @@
 /* --- ARQUIVO CSS (css/homepage.css) --- */
 
 .app-header {
-    background-color: var(--cor-preto);
-    color: var(--cor-dourado);
+    background-color: var(--cor-fundo-container);
+    color: var(--cor-texto);
     padding: 1rem 2rem;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-    border-bottom: 2px solid var(--cor-dourado);
+    border-bottom: 2px solid var(--cor-azul-principal);
 }
 
 .app-header .logo {
@@ -18,8 +17,8 @@
 
 .btn-logout {
     background: transparent;
-    border: 1px solid var(--cor-dourado);
-    color: var(--cor-dourado);
+    border: 1px solid var(--cor-azul-principal);
+    color: var(--cor-azul-principal);
     padding: 0.5rem 1rem;
     border-radius: 4px;
     cursor: pointer;
@@ -28,8 +27,8 @@
 }
 
 .btn-logout:hover {
-    background-color: var(--cor-dourado);
-    color: var(--cor-preto);
+    background-color: var(--cor-azul-principal);
+    color: var(--cor-branco);
 }
 
 .main-container {
@@ -40,7 +39,7 @@
 
 .main-container h1 {
     margin-bottom: 0.5rem;
-    color: var(--cor-preto);
+    color: var(--cor-branco);
 }
 .main-container p {
     margin-bottom: 2rem;
@@ -55,30 +54,31 @@
 }
 
 .menu-card {
-    background-color: var(--cor-branco);
+    background-color: var(--cor-fundo-container);
     border-radius: 8px;
     box-shadow: var(--sombra);
     padding: 2rem;
     text-decoration: none;
     color: var(--cor-texto);
-    border-top: 4px solid var(--cor-preto);
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    border: 1px solid var(--cor-borda);
+    border-top: 4px solid var(--cor-azul-principal);
+    transition: transform 0.3s ease, border-color 0.3s;
 }
 
 .menu-card:hover {
     transform: translateY(-5px);
-    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+    border-color: var(--cor-azul-principal);
 }
 
 .menu-card h3 {
-    color: var(--cor-preto);
+    color: var(--cor-azul-principal);
     margin-bottom: 0.75rem;
     font-size: 1.25rem;
 }
 
 .menu-card p {
     font-size: 0.95rem;
-    color: #666;
+    color: var(--cor-cinza-claro);
     line-height: 1.5;
     margin-bottom: 0;
 }

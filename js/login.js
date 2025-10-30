@@ -1,37 +1,44 @@
-// Espera o HTML carregar completamente antes de executar o script
-document.addEventListener("DOMContentLoaded", function() {
-    
-    // Seleciona o formulário de login pelo ID
-    const loginForm = document.getElementById("login-form");
+// --- ARQUIVO JS (js/login.js) ---
 
-    // Adiciona um "escutador" para o evento de "submit" (envio) do formulário
+// Ouve o evento do roteador
+document.addEventListener('pageLoaded', (e) => {
+    // Só executa se a página de login foi carregada
+    if (e.detail.path === '/login') {
+        initLoginPage();
+    }
+});
+
+function initLoginPage() {
+    // Adiciona a classe no body para o CSS da página de login funcionar
+    document.body.classList.add('login-page');
+    
+    const loginForm = document.getElementById("login-form");
+    if (!loginForm) return; // Segurança
+
     loginForm.addEventListener("submit", function(event) {
-        // 1. Impede o comportamento padrão do formulário (que é recarregar a página)
         event.preventDefault();
 
-        // 2. Pega os valores digitados nos campos
-        const username = document.getElementById("username").value;
+        const username = document.getElementById("username").value.toLowerCase();
         const password = document.getElementById("password").value;
 
-        // 3. ----- LÓGICA DE VALIDAÇÃO -----
-        // (No futuro, aqui você fará uma chamada para o seu backend para
-        // verificar se o usuário e a senha são válidos)
+        if (password === "") {
+             alert("Por favor, preencha a senha.");
+             return;
+        }
 
-        // 4. Simulação de login:
-        if (username !== "" && password !== "") {
-            console.log("Usuário:", username);
-            console.log("Senha:", password);
+        const validUsers = ["comercial", "logistica", "gerente"];
+        
+        if (validUsers.includes(username)) {
+            alert("Login realizado com sucesso! Redirecionando para o menu principal...");
             
-            // Exibe um alerta de sucesso
-            alert("Login realizado com sucesso! Redirecionando...");
+            // Remove a classe do body antes de navegar
+            document.body.classList.remove('login-page');
             
-            // CAMINHO CORRIGIDO:
-            // Da raiz (index.html) para dentro da pasta html/
-            window.location.href = "html/homepage.html"; 
+            // Navega usando o HASH (não recarrega a página)
+            window.location.hash = "#/sistema/home"; 
 
         } else {
-            alert("Por favor, preencha todos os campos.");
+            alert("Usuário não reconhecido. Tente 'comercial', 'logistica' ou 'gerente'.");
         }
     });
-
-});
+}

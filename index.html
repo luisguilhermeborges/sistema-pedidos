@@ -1,39 +1,95 @@
 <!DOCTYPE html>
-<html lang="pt-br">
+<html lang="pt-BR">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Pedidos | Login</title>
-    
-    <link rel="stylesheet" href="css/base.css">
-    
-    <link rel="stylesheet" href="css/login.css">
-    
-    <script src="js/login.js" defer></script>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>CÓDIGO DA CARNE</title>
+
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="css/base.css" />
+  
+  <link rel="stylesheet" href="css/eventos.css" />
+  <link rel="stylesheet" href="css/home.css" />
+  <link rel="stylesheet" href="css/clube.css" />
+  
+  <link rel="stylesheet" href="css/login.css" />
+  <link rel="stylesheet" href="css/homepage-sistema.css" />
+  <link rel="stylesheet" href="css/transferencias.css" />
+  <link rel="stylesheet" href="css/pedidos.css" />
+
+  <link rel="icon" href="assets/favicon-32x32.png" sizes="32x32" />
+  <link rel="icon" href="assets/favicon-16x16.png" sizes="16x16" />
+  <link rel="apple-touch-icon" href="assets/apple-touch-icon.png" />
+  
+  <meta name="theme-color" content="#640404" />
+  <meta name="description" content="Da seleção ao corte perfeito. Eventos, Clube e Lojas do Código da Carne." />
 </head>
+
 <body>
+  <div class="system-top-bar">
+      <a href="#/sistema/home" title="Voltar ao Menu Principal">
+          <img src="assets/logodeitadacdc.png" alt="Código da Carne Logo" class="system-top-bar__logo">
+      </a>
+  </div>
+  
+  <div class="topbar">
+    <div class="container topbar__wrap">
+      <a class="brand" href="#/home" aria-label="Código da Carne">
+        <img src="assets/logodeitadacdc.png" alt="Código da Carne" class="brand__logo-deitada" />
+      </a>
+      <a id="onbeef-button" class="btn btn-topbar-shop" href="https://codigo-da-carne.onbeef.app.br/" target="_blank" rel="noopener">
+        <span class="onbeef-text">Compre Aqui</span>
+        <img src="assets/carrinho.png" alt="Carrinho" class="onbeef-logo" />
+      </a>
+      </div>
+  </div>
 
-    <div class="login-container">
-        <form id="login-form">
-            <h2>Login</h2>
-            
-            <div class="input-group">
-                <label for="username">Usuário</label>
-                <input type="text" id="username" name="username" required>
-            </div>
-            
-            <div class="input-group">
-                <label for="password">Senha</label>
-                <input type="password" id="password" name="password" required>
-            </div>
-            
-            <div class="options">
-                <a href="#" class="forgot-password">Esqueceu sua senha?</a>
-            </div>
-            
-            <button type="submit" class="btn-login">Entrar</button>
-        </form>
+  <header class="header" role="banner">
+    <div class="container header__wrap">
+      <nav class="nav" aria-label="Principal">
+        <button id="navToggle" class="nav__toggle" aria-label="Abrir menu" aria-expanded="false" aria-controls="menu">☰</button>
+        <ul id="menu" class="nav__list">
+          <li><a class="nav__link" href="#/home" data-link>HOME</a></li>
+          <li><a class="nav__link" href="#/eventos" data-link>EVENTOS</a></li>
+          <li><a class="nav__link" href="#/clube" data-link>CLUBE</a></li>
+          <li><a class="nav__link" href="#/lojas" data-link>LOJAS</a></li>
+          <li><a class="nav__link" href="#/quem-somos" data-link>QUEM SOMOS</a></li>
+          <li><a class="nav__link" href="#/login" data-link>SISTEMA</a></li>
+        </ul>
+      </nav>
     </div>
+  </header>
+  
+  <header class="app-header">
+      <div class="logo">
+          Sistema de Pedidos
+      </div>
+      <nav>
+          <button id="logout-button" class="btn-logout">Sair</button>
+      </nav>
+  </header>
 
+  <main id="main-content" aria-live="polite" aria-busy="false">
+      </main>
+
+  <footer class="footer">
+    </footer>
+
+  <script src="js/carousel.js" defer></script>
+  <script src="js/eventos.js" defer></script>
+  <script src="js/clube.js" defer></script>
+  
+  <script src="js/database.js" defer></script>
+  <script src="js/login.js" defer></script>
+  <script src="js/homepage.js" defer></script>
+  <script src="js/transferencias.js" defer></script>
+  <script src="js/pedidos.js" defer></script>
+
+  <script src="js/app.js" defer></script>
+
+  <script>
+    document.getElementById('year').textContent = new Date().getFullYear();
+  </script>
 </body>
 </html>

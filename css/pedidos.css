@@ -1,0 +1,96 @@
+/* --- ARQUIVO CSS (css/pedidos.css) --- */
+
+.system-main-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 2rem;
+}
+
+.page-header {
+    margin-bottom: 2rem;
+}
+.page-header h1 { color: var(--text, #000000); }
+.page-header p { color: #555; text-transform: none; }
+
+#pedidos-list-container {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.empty-list-message {
+    color: #777;
+    font-size: 1.1rem;
+    text-align: center;
+    padding: 3rem;
+    background-color: var(--bg, #FFFFFF);
+    border: 1px dashed #ccc;
+    border-radius: 8px;
+}
+
+.pedido-card {
+    background-color: var(--bg, #FFFFFF);
+    border: 1px solid #eee;
+    border-radius: var(--radius, 16px);
+    box-shadow: var(--shadow);
+    overflow: hidden;
+}
+
+.pedido-card-header {
+    padding: 1rem 1.5rem;
+    background-color: var(--header, #F2F2F2);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid #eee;
+}
+.pedido-card-header h3 {
+    color: var(--topbar, #640404);
+    font-size: 1.3rem;
+    margin: 0;
+}
+.pedido-card-header span {
+    font-size: 0.9rem;
+    color: #555;
+    text-transform: none;
+}
+
+.pedido-card-lojas {
+    padding: 1rem 1.5rem;
+    display: flex;
+    gap: 2rem;
+}
+.pedido-card-lojas div {
+    font-size: 0.9rem;
+    color: #555;
+}
+.pedido-card-lojas div strong {
+    color: var(--text, #000000);
+    display: block;
+    font-size: 1.1rem;
+}
+
+.pedido-card-body {
+    padding: 0 1.5rem 1.5rem 1.5rem;
+}
+
+.pedido-card-body h4 {
+    color: var(--text, #000000);
+    font-weight: 500;
+    margin-bottom: 0.75rem;
+}
+
+.pedido-card-body ul {
+    list-style: none;
+    padding-left: 0.5rem;
+}
+.pedido-card-body li {
+    color: #555;
+    padding: 0.25rem 0;
+    text-transform: none;
+}
+.pedido-card-body li strong {
+    color: var(--text, #000000);
+    min-width: 30px;
+    display: inline-block;
+}

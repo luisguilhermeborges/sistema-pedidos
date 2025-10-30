@@ -3,15 +3,57 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Pedidos | Transferências</title>
+    <title>Pedidos | Nova Operação</title>
     
     <link rel="stylesheet" href="../css/base.css">
+    <link rel="stylesheet" href="../css/homepage.css"> 
     <link rel="stylesheet" href="../css/transferencias.css">
+    
+    <script src="../js/database.js" defer></script> 
     
     <script src="../js/transferencias.js" defer></script>
 </head>
 <body>
 
+    <div id="selection-overlay" class="selection-overlay">
+        <div class="selection-modal">
+            <h2>Nova Operação</h2>
+            <p>Selecione o que você deseja fazer.</p>
+            
+            <div class="input-group">
+                <label for="operation-type">Tipo de Operação</label>
+                <select id="operation-type">
+                    <option value="">-- Selecione --</option>
+                    <option value="pedido">Pedido de Loja</option>
+                    <option value="transferencia">Transferência / Retorno</option>
+                </select>
+            </div>
+
+            <div id="pedido-fields" class="hidden">
+                <div class="input-group">
+                    <label for="loja-origem">Minha Loja (Origem)</label>
+                    <select id="loja-origem">
+                        <option value="">-- Selecione a Origem --</option>
+                        <option value="001: Centro">001: Centro</option>
+                        <option value="002: Alphaville">002: Alphaville</option>
+                        <option value="003: Gleba">003: Gleba</option>
+                    </select>
+                </div>
+                <div class="input-group">
+                    <label for="loja-destino">Solicitar Para (Destino)</label>
+                    <select id="loja-destino">
+                        <option value="">-- Selecione o Destino --</option>
+                        <option value="001: Centro">001: Centro</option>
+                        <option value="002: Alphaville">002: Alphaville</option>
+                        <option value="003: Gleba">003: Gleba</option>
+                    </select>
+                </div>
+            </div>
+
+            <button id="start-operation-btn" class="btn-iniciar" disabled>Iniciar</button>
+        </div>
+    </div>
+    
     <header class="app-header">
         <div class="logo">
             Sistema de Pedidos
@@ -24,20 +66,24 @@
 
     <main class="main-container">
         
-        <div class="page-header">
-            <h1>Registrar Transferência / Retorno</h1>
-            <p>Selecione os itens, o motivo e a quantidade.</p>
-        </div>
+        <div id="pedido-header-info" class="pedido-header-info">
+            </div>
 
-        <div class="transferencia-container">
+        <div id="operation-container" class="operation-container">
 
-            <section class="item-list-section">
-                <h2>Itens Disponíveis</h2>
-                <div id="available-items-container">
+            <section id="item-list-section" class="item-list-section">
+                
+                <div class="search-bar-container">
+                    <input type="text" id="search-input" class="search-input" placeholder="Pesquisar por nome ou código...">
+                    <button id="btn-search-clear" class="btn-search-clear" title="Limpar pesquisa">✖</button>
+                </div>
+                
+                <div id="categories-wrapper">
                     </div>
+
             </section>
 
-            <aside class="cart-summary-section">
+            <aside id="cart-container" class="cart-summary-section">
                 <h2>Itens para Enviar</h2>
                 
                 <div id="cart-items-container">
@@ -46,7 +92,7 @@
 
                 <div class="cart-footer">
                     <button id="finalize-order-btn" class="btn-finalizar" disabled>
-                        Finalizar Transferência
+                        Finalizar Pedido
                     </button>
                 </div>
             </aside>

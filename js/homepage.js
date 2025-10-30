@@ -1,31 +1,25 @@
-// Espera o HTML carregar completamente
-document.addEventListener("DOMContentLoaded", function() {
+// --- ARQUIVO JS (js/homepage.js) ---
 
-    // Encontra o botão de "Sair" pelo ID
+// Ouve o evento do roteador
+document.addEventListener('pageLoaded', (e) => {
+    // Só executa se a homepage do sistema foi carregada
+    if (e.detail.path === '/sistema/home') {
+        initHomePage();
+    }
+});
+
+function initHomePage() {
+    // O botão de logout está no index.html, então podemos buscá-lo
     const logoutButton = document.getElementById("logout-button");
 
-    // Verifica se o botão existe antes de adicionar o evento
     if (logoutButton) {
-        // Adiciona um "escutador" para o evento de clique
-        logoutButton.addEventListener("click", function() {
-            
-            // Pergunta ao usuário se ele realmente quer sair
-            const confirmed = confirm("Você tem certeza que deseja sair?");
-            
-            if (confirmed) {
-                // Se sim, redireciona para a página de login
+        // Usamos .onclick para garantir que o evento seja "fresco"
+        logoutButton.onclick = function() { 
+            if (confirm("Você tem certeza que deseja sair?")) {
                 alert("Deslogando...");
-                
-                // CAMINHO CORRIGIDO:
-                // De dentro da pasta html/ (homepage.html) para a raiz (index.html)
-                // ".." significa "voltar um nível"
-                window.location.href = "../index.html";
+                // Navega para a página de login
+                window.location.hash = "#/login";
             }
-            // Se não, não faz nada
-        });
+        };
     }
-
-    // No futuro, aqui você também pode buscar o nome do usuário
-    // e substituir o texto "[Nome do Usuário]" no HTML.
-
-});
+}
