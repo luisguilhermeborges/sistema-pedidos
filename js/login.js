@@ -21,10 +21,15 @@ function initLoginPage() {
         const username = document.getElementById("username").value.toLowerCase();
         const password = document.getElementById("password").value;
 
+        // --- BLOCO REMOVIDO ---
+        // O código abaixo, que impedia a senha em branco, foi removido.
+        /*
         if (password === "") {
              alert("Por favor, preencha a senha.");
              return;
         }
+        */
+        // --- FIM DO BLOCO REMOVIDO ---
 
         const validUsers = ["comercial", "logistica", "gerente"];
         

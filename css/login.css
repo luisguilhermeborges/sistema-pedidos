@@ -1,19 +1,28 @@
 /* --- ARQUIVO CSS (css/login.css) --- */
-/* (Estilos específicos da página de login) */
 
-/* Avisa o JS para aplicar classes especiais */
-body.system-active[data-page="/login"] {
-    /* (Isso é um truque, o JS vai ler isso e adicionar a classe 'login-page') */
+/* O body da página de login é centralizado
+   e não precisa do padding-top do base.css */
+body.login-page-body {
+    padding-top: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
-/* Centraliza o container de login */
+/* O Top Bar na página de login fica por cima de tudo */
+body.login-page-body .system-top-bar {
+    position: fixed;
+}
+
+/* Wrapper para centralizar o card */
 .login-container-wrapper {
     display: flex;
     align-items: center;
     justify-content: center;
     width: 100%;
-    min-height: calc(100vh - var(--system-top-bar-height));
-    padding: 2rem 0;
+    padding: 2rem;
+    /* Garante que o card não fique embaixo do top bar */
+    margin-top: var(--system-top-bar-height); 
 }
 
 .login-card {
