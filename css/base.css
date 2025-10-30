@@ -1,0 +1,56 @@
+/* --- ARQUIVO BASE (css/base.css) --- */
+
+/* 1. Variáveis de Cor (Tema "Chique") */
+/* Usamos :root para que as variáveis fiquem disponíveis em todo o site */
+:root {
+    --cor-fundo: #fdfaf6;       /* Bege claro */
+    --cor-preto: #1a1a1a;       /* Preto "JPS" */
+    --cor-dourado: #D4AF37;     /* Dourado "Lotus" */
+    
+    --cor-branco: #ffffff;
+    --cor-cinza-claro: #ccc;
+    --cor-cinza-texto: #555;
+    --cor-texto: #333;
+
+    --sombra: 0 4px 12px rgba(0, 0, 0, 0.05);
+}
+
+/* 2. Reset Global e Padrões do Body */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    /* Fonte padrão "clean" */
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+}
+
+body {
+    background-color: var(--cor-fundo); /* Usa a variável */
+    color: var(--cor-texto);            /* Usa a variável */
+    min-height: 100vh;
+}
+
+/* 3. Estilos de componentes reutilizáveis */
+
+/* Estilo padrão para inputs */
+.input-group input {
+    width: 100%;
+    padding: 0.75rem;
+    border: 1px solid var(--cor-cinza-claro);
+    border-radius: 4px;
+    font-size: 1rem;
+    transition: border-color 0.3s, box-shadow 0.3s;
+}
+
+/* Destaque dourado ao focar */
+.input-group input:focus {
+    outline: none;
+    border-color: var(--cor-dourado);
+    box-shadow: 0 0 0 2px rgba(212, 175, 55, 0.2);
+}
+
+.input-group label {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-weight: 500;
+}

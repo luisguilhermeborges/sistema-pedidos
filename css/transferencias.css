@@ -1,0 +1,196 @@
+/* --- ARQUIVO CSS (css/transferencias.css) --- */
+
+/* Estilos do Cabeçalho (Botões de Navegação) */
+.app-header {
+    justify-content: space-between;
+}
+.btn-nav, .btn-logout {
+    background: transparent;
+    border: 1px solid var(--cor-dourado);
+    color: var(--cor-dourado);
+    padding: 0.5rem 1rem;
+    border-radius: 4px;
+    cursor: pointer;
+    font-weight: 600;
+    text-decoration: none;
+    transition: background-color 0.3s, color 0.3s;
+}
+.btn-nav { margin-right: 1rem; }
+.btn-nav:hover, .btn-logout:hover {
+    background-color: var(--cor-dourado);
+    color: var(--cor-preto);
+}
+
+/* Container principal da página */
+.main-container {
+    max-width: 1400px;
+    margin: 2rem auto;
+    padding: 0 2rem;
+}
+
+.page-header {
+    margin-bottom: 2rem;
+}
+
+/* Layout de 2 colunas */
+.transferencia-container {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: 2rem;
+    align-items: flex-start;
+}
+
+/* --- Coluna da Esquerda (Itens) --- */
+.item-list-section h2, .cart-summary-section h2 {
+    color: var(--cor-preto);
+    margin-bottom: 1.5rem;
+    border-bottom: 2px solid #eee;
+    padding-bottom: 0.5rem;
+}
+
+#available-items-container {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.item-card {
+    background-color: var(--cor-branco);
+    border-radius: 8px;
+    box-shadow: var(--sombra);
+    padding: 1.5rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-left: 5px solid var(--cor-preto);
+}
+
+.item-card h4 {
+    font-size: 1.15rem;
+    margin-bottom: 0.5rem;
+}
+span.tag-classificacao {
+    display: inline-block;
+    padding: 0.25rem 0.6rem;
+    border-radius: 12px;
+    font-size: 0.8rem;
+    font-weight: 500;
+    background-color: #e0e0e0;
+    color: #555;
+}
+
+/* Ações do Card (Motivo + Qtd + Botão) */
+.item-actions {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+}
+
+/* --- NOVO CAMPO: Select de Motivo --- */
+.item-actions .item-motivo {
+    padding: 0.6rem;
+    border: 1px solid var(--cor-cinza-claro);
+    border-radius: 4px;
+    background-color: #fafafa;
+    font-size: 0.9rem;
+}
+.item-actions .item-motivo:focus {
+    outline: none;
+    border-color: var(--cor-dourado);
+}
+
+.item-actions .item-quantity {
+    width: 70px;
+    padding: 0.6rem;
+    text-align: center;
+    border: 1px solid var(--cor-cinza-claro);
+    border-radius: 4px;
+}
+.item-actions .item-quantity:focus {
+     outline: none;
+    border-color: var(--cor-dourado);
+}
+
+
+.btn-add-item {
+    background-color: var(--cor-preto);
+    color: var(--cor-branco);
+    border: none;
+    padding: 0.6rem 1rem;
+    border-radius: 4px;
+    cursor: pointer;
+    font-weight: 600;
+    transition: background-color 0.3s;
+}
+.btn-add-item:hover { background-color: #333; }
+
+
+/* --- Coluna da Direita (Carrinho) --- */
+.cart-summary-section {
+    background-color: var(--cor-branco);
+    border-radius: 8px;
+    box-shadow: var(--sombra);
+    padding: 1.5rem;
+    position: sticky;
+    top: 2rem; 
+}
+
+.cart-empty-message {
+    color: var(--cor-cinza-texto);
+    text-align: center;
+    padding: 2rem 0;
+}
+#cart-items-container {
+    max-height: 400px;
+    overflow-y: auto;
+}
+
+.cart-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 0;
+    border-bottom: 1px solid #f0f0f0;
+}
+.cart-item:last-child { border-bottom: none; }
+
+.cart-item-info strong { color: var(--cor-preto); }
+.cart-item-info span {
+    color: var(--cor-cinza-texto);
+    font-size: 0.9rem;
+    display: block; /* Faz o motivo ir para a linha de baixo */
+    margin-top: 4px;
+}
+
+.btn-remove-item {
+    background: transparent;
+    border: none;
+    color: #e74c3c;
+    font-size: 1.2rem;
+    cursor: pointer;
+}
+
+/* Rodapé do Carrinho */
+.cart-footer {
+    border-top: 2px solid #eee;
+    padding-top: 1.5rem;
+    margin-top: 1rem;
+}
+.btn-finalizar {
+    width: 100%;
+    padding: 0.85rem;
+    border: none;
+    border-radius: 4px;
+    background-color: var(--cor-dourado);
+    color: var(--cor-preto);
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+.btn-finalizar:hover { background-color: #c9a030; }
+.btn-finalizar:disabled {
+    background-color: var(--cor-cinza-claro);
+    color: var(--cor-cinza-texto);
+    cursor: not-allowed;
+}

@@ -1,0 +1,84 @@
+/* --- ARQUIVO CSS (css/homepage.css) --- */
+
+.app-header {
+    background-color: var(--cor-preto);
+    color: var(--cor-dourado);
+    padding: 1rem 2rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    border-bottom: 2px solid var(--cor-dourado);
+}
+
+.app-header .logo {
+    font-size: 1.5rem;
+    font-weight: 600;
+}
+
+.btn-logout {
+    background: transparent;
+    border: 1px solid var(--cor-dourado);
+    color: var(--cor-dourado);
+    padding: 0.5rem 1rem;
+    border-radius: 4px;
+    cursor: pointer;
+    font-weight: 600;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+.btn-logout:hover {
+    background-color: var(--cor-dourado);
+    color: var(--cor-preto);
+}
+
+.main-container {
+    max-width: 1200px;
+    margin: 2rem auto;
+    padding: 0 2rem;
+}
+
+.main-container h1 {
+    margin-bottom: 0.5rem;
+    color: var(--cor-preto);
+}
+.main-container p {
+    margin-bottom: 2rem;
+    font-size: 1.1rem;
+    color: var(--cor-cinza-texto);
+}
+
+.menu-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1.5rem;
+}
+
+.menu-card {
+    background-color: var(--cor-branco);
+    border-radius: 8px;
+    box-shadow: var(--sombra);
+    padding: 2rem;
+    text-decoration: none;
+    color: var(--cor-texto);
+    border-top: 4px solid var(--cor-preto);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.menu-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+}
+
+.menu-card h3 {
+    color: var(--cor-preto);
+    margin-bottom: 0.75rem;
+    font-size: 1.25rem;
+}
+
+.menu-card p {
+    font-size: 0.95rem;
+    color: #666;
+    line-height: 1.5;
+    margin-bottom: 0;
+}

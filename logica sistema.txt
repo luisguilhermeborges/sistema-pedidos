@@ -1,0 +1,78 @@
+PEDIDOS
+    LOGIN COM CONTROLE USUARIO, NOME E SENHA
+        ESQUECEU SUA SENHA
+
+    VARIAVEIS
+        
+        LOGIN
+        
+        ITENS (IMPORTAR POR PADRÃO)
+            COD
+            NOME
+            CLASSIFICAÇÃO (SECOS, RESFRIADOS, CONGELADOS, INSUMOS)
+            PRIORIDADE
+                (BAIXO, MÉDIO, ALTA, URGENTE)
+            PRODUTO FINAL (MANIPULAÇÃO DE DADOS)
+            QTDE
+
+        SOLICITACAO
+            ID
+            DATA
+            HORARIO
+            USUARIO
+
+        RELATORIOS
+            ITENS QUE FORAM PEDIDOS X ENTREGUES
+            ITENS QUE NÃO FORAM ENTREGUES X PEDIDO
+            
+    MENU PRINCIPAL
+        PEDIDOS 
+            USUARIO: COMERCIAL 1
+            TIPO
+                SELECIONAR ORIGEM
+                    
+                    001: CENTRO
+                    002: ALPHAVILLE
+                    003: GLEBA
+                
+                SELECIONAR DESTINO
+                    001: CENTRO
+                    002: ALPHAVILLE
+                    003: GLEBA
+
+            ITENS
+                SE PRODUTO FINAL
+                    LISTA COM ITENS PARA EXPLODIR
+                        SECOS +
+                        RESFRIADOS+
+                        CONGELADOS+
+                        INSUMOS+
+                    PRIORIDADE
+                    QTDE (MOSTRAR SEMPRE ZERADO, USUARIO PODE COLOCAR QUANTOS SÃO EM QUANTIDADE DE PEÇAS)
+
+            CARRINHO
+                ITENS
+                    EDITAR QTDE
+                    EXCLUIR
+                FINALIZAR PEDIDO
+        PEDIDOS
+            USUARIO: LOGISTICA
+            SOLICITAÇÕES EM ABERTO
+                SOLICITAÇÃO ID SOLICITAÇÃO
+                    ITEM
+                    QTDE ATENDIDA
+
+                CARRINHO
+                    EDITAR QTDE
+                    EXCLUIR
+                    ADICIONAR AO PEDIDO
+                
+        RELATORIOS
+            NIVEL DE LIBERAÇÃO: GERENTE <=1
+            SOLICITAÇÕES ABERTAS
+            SOLICITAÇÕES ATENDIDADAS
+            ITENS NÃO ATENDIDOS
+            ITENS SEM MOVIMENTAÇÃO NO PERIODO
+
+        
+        VISUAL, USAR A BASE COMO REFERENCIA DE BOTÕES, BORDAS, ETC, COR DE FUNDO BEGE CLARO, BOTÕES EM PRETO COM COR DOURADA COMO A LOTUS PRETA DO SENNA, DETALHES CHIQUE
