@@ -1,4 +1,5 @@
 // --- ARQUIVO JS (js/transferencias.js) ---
+// (Lógica de "sempre adicionar" + categorias recolhidas)
 
 document.addEventListener("DOMContentLoaded", function() {
     
@@ -27,9 +28,10 @@ document.addEventListener("DOMContentLoaded", function() {
     const searchInput = document.getElementById("search-input");
     const btnSearchClear = document.getElementById("btn-search-clear");
 
-    if (!selectionOverlay) return; // Segurança
+    if (!selectionOverlay) return;
 
     // --- 3. FLUXO DE INICIALIZAÇÃO (MODAL) ---
+    // (Esta parte não muda)
     operationTypeSelect.addEventListener("change", function() {
         const type = this.value;
         if (type === "pedido") {
@@ -45,22 +47,16 @@ document.addEventListener("DOMContentLoaded", function() {
     });
     lojaOrigemSelect.addEventListener("change", validateModal);
     lojaDestinoSelect.addEventListener("change", validateModal);
-    
     function validateModal() {
         const origem = lojaOrigemSelect.value;
         const destino = lojaDestinoSelect.value;
         startOperationBtn.disabled = !(origem && destino && origem !== destino);
     }
-    
     startOperationBtn.addEventListener("click", function() {
         const type = operationTypeSelect.value;
-        if (type === "pedido") {
-            startNewPedido();
-        } else if (type === "transferencia") {
-            startNewPedido(true); 
-        }
+        if (type === "pedido") startNewPedido();
+        else if (type === "transferencia") startNewPedido(true); 
     });
-    
     function startNewPedido(isTransferencia = false) {
         const origem = lojaOrigemSelect.value;
         const destino = lojaDestinoSelect.value;
@@ -69,7 +65,6 @@ document.addEventListener("DOMContentLoaded", function() {
             day: '2-digit', month: '2-digit', year: 'numeric',
             hour: '2-digit', minute: '2-digit'
         });
-
         currentOrderInfo = {
             id: orderId,
             date: orderDate,
@@ -77,20 +72,14 @@ document.addEventListener("DOMContentLoaded", function() {
             destino: isTransferencia ? "Central" : destino,
             items: []
         };
-
-        if (isTransferencia) {
-            pedidoHeaderInfo.innerHTML = `<strong>Transferência #${currentOrderInfo.id}</strong> - ${currentOrderInfo.date}`;
-        } else {
-            pedidoHeaderInfo.innerHTML = `<strong>Pedido #${currentOrderInfo.id}</strong> (De: ${origem} | Para: ${destino}) - ${currentOrderInfo.date}`;
-        }
+        pedidoHeaderInfo.innerHTML = isTransferencia ? `<strong>Transferência #${currentOrderInfo.id}</strong> - ${currentOrderInfo.date}` : `<strong>Pedido #${currentOrderInfo.id}</strong> (De: ${origem} | Para: ${destino}) - ${currentOrderInfo.date}`;
         pedidoHeaderInfo.style.display = "block";
         selectionOverlay.style.display = "none";
-        
         renderProductCategories();
         setupSearchListeners();
     }
 
-    // --- 4. RENDERIZAÇÃO DE PRODUTOS ---
+    // --- 4. RENDERIZAÇÃO DE PRODUTOS (COM ACORDEÃO) ---
     function renderProductCategories() {
         categoriesWrapper.innerHTML = "";
         const groupedItems = mockDatabase.reduce((acc, item) => {
@@ -101,22 +90,30 @@ document.addEventListener("DOMContentLoaded", function() {
         for (const category in groupedItems) {
             const categoryBlock = document.createElement("div");
             categoryBlock.className = "category-block";
-
             const categoryHeader = document.createElement("h3");
             categoryHeader.className = "category-header";
             categoryHeader.textContent = category;
-            
             const itemGrid = document.createElement("div");
             itemGrid.className = "item-grid";
+            // (display: none; é o padrão do CSS)
 
             groupedItems[category].forEach(item => {
                 const itemCard = createProductCard(item);
                 itemGrid.appendChild(itemCard);
             });
 
+            // --- LÓGICA DO CLIQUE (RE-ADICIONADA) ---
             categoryHeader.addEventListener("click", () => {
-                itemGrid.style.display = itemGrid.style.display === "grid" ? "none" : "grid";
+                const isOpen = itemGrid.style.display === "grid";
+                if (isOpen) {
+                    itemGrid.style.display = "none";
+                    categoryHeader.classList.remove("is-open");
+                } else {
+                    itemGrid.style.display = "grid";
+                    categoryHeader.classList.add("is-open");
+                }
             });
+            // --- FIM DA ATUALIZAÇÃO ---
 
             categoryBlock.appendChild(categoryHeader);
             categoryBlock.appendChild(itemGrid);
@@ -124,23 +121,27 @@ document.addEventListener("DOMContentLoaded", function() {
         }
     }
 
+    // --- createProductCard (Sem mudança na estrutura) ---
     function createProductCard(item) {
         const card = document.createElement("div");
         card.className = "product-card";
         card.dataset.cod = item.cod;
         card.dataset.nome = item.nome.toLowerCase();
 
+        // O HTML do card é o mesmo da versão anterior
         card.innerHTML = `
-            <div class="product-card-header">
+            <div class="product-info">
                 <h4>${item.nome}</h4>
                 <span class="item-cod">#${item.cod}</span>
             </div>
-            <div class="qty-selector">
-                <button class="qty-btn minus" aria-label="Diminuir" disabled>-</button>
-                <input type="number" class="item-quantity" value="1" min="1">
-                <button class="qty-btn plus" aria-label="Aumentar">+</button>
+            <div class="product-actions">
+                <div class="qty-selector">
+                    <button class="qty-btn minus" aria-label="Diminuir" disabled>-</button>
+                    <input type="number" class="item-quantity" value="1" min="1">
+                    <button class="qty-btn plus" aria-label="Aumentar">+</button>
+                </div>
+                <button class="btn-add-item">Adicionar</button>
             </div>
-            <button class="btn-add-item">Adicionar</button>
         `;
 
         const qtyInput = card.querySelector(".item-quantity");
@@ -163,32 +164,47 @@ document.addEventListener("DOMContentLoaded", function() {
              btnMinus.disabled = (qtyInput.value == 1);
         });
         
+        // O clique chama a nova lógica de "sempre adicionar"
         btnAdd.addEventListener("click", () => handleAddItem(card, item));
         return card;
     }
 
-    // --- 5. LÓGICA DO CARRINHO ---
+    // --- 5. LÓGICA DO CARRINHO (ATUALIZADA) ---
+    
+    // --- NOVA LÓGICA "SEMPRE ADICIONAR" ---
     function handleAddItem(cardElement, itemData) {
         const cod = itemData.cod;
+        const quantityInput = cardElement.querySelector(".item-quantity");
+        const quantity = parseInt(quantityInput.value, 10);
+        
+        if (quantity <= 0) {
+            alert("A quantidade deve ser pelo menos 1.");
+            return;
+        }
+
         const itemInCart = cart.find(item => item.cod === cod);
         
         if (itemInCart) {
-            cart = cart.filter(item => item.cod !== cod);
-            cardElement.classList.remove("item-selected");
-            cardElement.querySelector(".btn-add-item").textContent = "Adicionar";
+            // Se já está, SOMA a quantidade
+            itemInCart.quantity += quantity;
         } else {
-            const quantity = parseInt(cardElement.querySelector(".item-quantity").value);
-            if (quantity <= 0) {
-                alert("A quantidade deve ser pelo menos 1.");
-                return;
-            }
-            cart.push({ ...itemData, quantity: quantity });
-            cardElement.classList.add("item-selected");
-            cardElement.querySelector(".btn-add-item").textContent = "Remover";
+            // Se não está, ADICIONA novo item
+            cart.push({
+                ...itemData,
+                quantity: quantity
+            });
         }
+
+        // Reseta o input de quantidade para 1
+        quantityInput.value = "1";
+        const btnMinus = cardElement.querySelector(".qty-btn.minus");
+        if (btnMinus) btnMinus.disabled = true;
+
+        // Não muda o texto do botão nem a classe do card
         renderCart();
     }
 
+    // --- LÓGICA DO CARRINHO (BOTÃO "X" CORRIGIDO) ---
     function renderCart() {
         if (cart.length === 0) {
             cartEmptyMsg.style.display = "block";
@@ -197,7 +213,6 @@ document.addEventListener("DOMContentLoaded", function() {
         } else {
             cartEmptyMsg.style.display = "none";
             cartItemsContainer.innerHTML = ""; 
-            
             cart.forEach(item => {
                 const cartItem = document.createElement("div");
                 cartItem.className = "cart-item";
@@ -209,10 +224,12 @@ document.addEventListener("DOMContentLoaded", function() {
                     </div>
                     <button class="btn-remove-item" title="Excluir item">✖</button>
                 `;
+
+                // --- LÓGICA DO "X" CORRIGIDA ---
                 cartItem.querySelector(".btn-remove-item").addEventListener("click", () => {
-                    const cardElement = categoriesWrapper.querySelector(`.product-card[data-cod="${item.cod}"]`);
-                    if (cardElement) {
-                        handleAddItem(cardElement, item);
+                    if (confirm(`Tem certeza que deseja remover "${item.nome}" do carrinho?`)) {
+                        cart = cart.filter(cartItem => cartItem.cod !== item.cod);
+                        renderCart(); // Atualiza o carrinho
                     }
                 });
                 cartItemsContainer.appendChild(cartItem);
@@ -221,7 +238,7 @@ document.addEventListener("DOMContentLoaded", function() {
         }
     }
     
-    // --- 6. FINALIZAR PEDIDO ---
+    // --- 6. FINALIZAR PEDIDO (Sem alteração) ---
     finalizeBtn.addEventListener("click", function() {
         if (cart.length === 0) {
             alert("O carrinho está vazio.");
@@ -230,19 +247,15 @@ document.addEventListener("DOMContentLoaded", function() {
         if (!confirm("Tem certeza que deseja finalizar e enviar este pedido?")) {
             return;
         }
-        
         currentOrderInfo.items = cart;
         const savedOrders = JSON.parse(localStorage.getItem("meusPedidos")) || [];
         savedOrders.push(currentOrderInfo);
         localStorage.setItem("meusPedidos", JSON.stringify(savedOrders));
-
         alert(`Pedido #${currentOrderInfo.id} salvo com sucesso!`);
-        
-        // Redireciona para a homepage do sistema
         window.location.href = "homepage.html";
     });
 
-    // --- 7. LÓGICA DE PESQUISA ---
+    // --- 7. LÓGICA DE PESQUISA (ATUALIZADA para Acordeão) ---
     function setupSearchListeners() {
         searchInput.addEventListener("input", () => {
             const searchTerm = searchInput.value.toLowerCase().trim();
@@ -268,26 +281,31 @@ document.addEventListener("DOMContentLoaded", function() {
             card.style.display = isMatch ? "flex" : "none";
         });
 
+        // Agora, ajusta as categorias (acordeão)
         allCategoryBlocks.forEach(block => {
             const header = block.querySelector(".category-header");
             const grid = block.querySelector(".item-grid");
             const hasVisibleItems = block.querySelector(".product-card[style*='display: flex']");
 
-            if (hasVisibleItems) {
-                header.style.display = "block";
-                grid.style.display = "grid";
-            } else {
-                header.style.display = "none";
-            }
-            
             if (term === "") {
+                // Se limpou a busca, fecha tudo
+                block.style.display = "block";
                 grid.style.display = "none";
-                header.style.display = "block";
+                header.classList.remove("is-open");
+            } else {
+                // Se está buscando
+                if (hasVisibleItems) {
+                    block.style.display = "block"; // Mostra o bloco
+                    grid.style.display = "grid";   // Força a abertura
+                    header.classList.add("is-open"); // Adiciona a classe para o ícone
+                } else {
+                    block.style.display = "none"; // Esconde o bloco inteiro
+                }
             }
         });
     }
 
-    // --- 8. OUTROS EVENTOS ---
+    // --- 8. OUTROS EVENTOS (Sem alteração) ---
     if (logoutButton) {
         logoutButton.addEventListener("click", function() {
             if (confirm("Você tem certeza que deseja sair?")) {

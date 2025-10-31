@@ -1,10 +1,48 @@
-<div class="system-main-container">
-    <div class="page-header">
-        <h1>Meus Pedidos Abertos</h1>
-        <p>Acompanhe aqui os pedidos que você já solicitou.</p>
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sistema de Pedidos | Meus Pedidos</title>
+    
+    <link rel="icon" href="../assets/favicon-32x32.png" sizes="32x32">
+    <link rel="icon" href="../assets/favicon-16x16.png" sizes="16x16">
+    <link rel="apple-touch-icon" href="../assets/apple-touch-icon.png">
+
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="../css/base.css">
+    <link rel="stylesheet" href="../css/pedidos.css"> 
+    
+    <script src="../js/pedidos.js" defer></script>
+</head>
+<body>
+
+    <div class="system-top-bar">
+        <a href="homepage.html" title="Voltar ao Menu Principal">
+            <img src="../assets/logodeitadacdc.png" alt="Código da Carne Logo" class="system-top-bar__logo">
+        </a>
     </div>
 
-    <div id="pedidos-list-container">
-        <p class="empty-list-message">Nenhum pedido aberto encontrado.</p>
-    </div>
-</div>
+    <header class="app-header">
+        <div class="logo">
+            Sistema de Pedidos
+        </div>
+        <nav>
+            <button id="logout-button" class="btn-logout">Sair</button>
+        </nav>
+    </header>
+
+    <main class="system-main-container">
+        <div class="page-header">
+            <h1>Meus Pedidos Abertos</h1>
+            <p>Acompanhe aqui os pedidos que você já solicitou.</p>
+        </div>
+
+        <div id="pedidos-list-container">
+            <p class="empty-list-message">Nenhum pedido aberto encontrado.</p>
+        </div>
+    </main>
+
+</body>
+</html>

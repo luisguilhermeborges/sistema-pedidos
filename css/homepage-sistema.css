@@ -1,6 +1,6 @@
 /* --- ARQUIVO CSS (css/homepage-sistema.css) --- */
+/* (Corrigido para usar o tema do base.css) */
 
-/* Container principal para as páginas do sistema */
 .system-main-container {
     max-width: 1200px;
     margin: 2rem auto; /* Espaçamento padrão */
@@ -51,4 +51,5 @@
     color: #666;
     line-height: 1.5;
     margin-bottom: 0;
+    text-transform: none;
 }

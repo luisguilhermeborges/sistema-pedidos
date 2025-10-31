@@ -1,49 +1,33 @@
 // --- ARQUIVO JS (js/login.js) ---
+// (Versão correta com DOMContentLoaded)
 
-// Ouve o evento do roteador
-document.addEventListener('pageLoaded', (e) => {
-    // Só executa se a página de login foi carregada
-    if (e.detail.path === '/login') {
-        initLoginPage();
-    }
-});
-
-function initLoginPage() {
-    // Adiciona a classe no body para o CSS da página de login funcionar
-    document.body.classList.add('login-page');
+document.addEventListener("DOMContentLoaded", function() {
     
     const loginForm = document.getElementById("login-form");
     if (!loginForm) return; // Segurança
 
     loginForm.addEventListener("submit", function(event) {
+        // 1. Impede o comportamento padrão do formulário
         event.preventDefault();
 
+        // 2. Pega os valores
         const username = document.getElementById("username").value.toLowerCase();
-        const password = document.getElementById("password").value;
+        
+        // Pega a senha (campo não é obrigatório)
+        const passwordInput = document.getElementById("password");
+        const password = passwordInput ? passwordInput.value : ""; 
 
-        // --- BLOCO REMOVIDO ---
-        // O código abaixo, que impedia a senha em branco, foi removido.
-        /*
-        if (password === "") {
-             alert("Por favor, preencha a senha.");
-             return;
-        }
-        */
-        // --- FIM DO BLOCO REMOVIDO ---
-
+        // 3. Validação
         const validUsers = ["comercial", "logistica", "gerente"];
         
         if (validUsers.includes(username)) {
-            alert("Login realizado com sucesso! Redirecionando para o menu principal...");
+            alert("Login realizado com sucesso! Redirecionando...");
             
-            // Remove a classe do body antes de navegar
-            document.body.classList.remove('login-page');
-            
-            // Navega usando o HASH (não recarrega a página)
-            window.location.hash = "#/sistema/home"; 
+            // 4. Redireciona para a pasta html/
+            window.location.href = "html/homepage.html"; 
 
         } else {
             alert("Usuário não reconhecido. Tente 'comercial', 'logistica' ou 'gerente'.");
         }
     });
-}
+});

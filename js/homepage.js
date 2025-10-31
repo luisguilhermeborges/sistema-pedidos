@@ -1,25 +1,17 @@
 // --- ARQUIVO JS (js/homepage.js) ---
+// (Versão correta com DOMContentLoaded)
 
-// Ouve o evento do roteador
-document.addEventListener('pageLoaded', (e) => {
-    // Só executa se a homepage do sistema foi carregada
-    if (e.detail.path === '/sistema/home') {
-        initHomePage();
-    }
-});
-
-function initHomePage() {
-    // O botão de logout está no index.html, então podemos buscá-lo
+document.addEventListener("DOMContentLoaded", function() {
+    
     const logoutButton = document.getElementById("logout-button");
 
     if (logoutButton) {
-        // Usamos .onclick para garantir que o evento seja "fresco"
-        logoutButton.onclick = function() { 
+        logoutButton.addEventListener("click", function() { 
             if (confirm("Você tem certeza que deseja sair?")) {
                 alert("Deslogando...");
-                // Navega para a página de login
-                window.location.hash = "#/login";
+                // Volta para a raiz (index.html)
+                window.location.href = "../index.html";
             }
-        };
+        });
     }
-}
+});
